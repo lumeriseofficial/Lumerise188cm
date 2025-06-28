@@ -26,7 +26,7 @@
       border-radius: 10px;
       margin-bottom: 20px;
     }
-    .button {
+    .button, .sticky-cta {
       background: #28a745;
       color: white;
       padding: 15px;
@@ -37,6 +37,13 @@
       margin: 20px 0;
       font-size: 1.1em;
       font-weight: bold;
+    }
+    .sticky-cta {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      z-index: 1000;
     }
     ul {
       padding-left: 20px;
@@ -59,7 +66,8 @@
     .footer {
       text-align: center;
       font-size: 0.9em;
-      margin-top: 40px;
+      margin-top: 60px;
+      color: #555;
     }
     .limited-time {
       color: red;
@@ -67,12 +75,43 @@
       text-align: center;
       margin: 20px 0;
     }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      z-index: 1001;
+      animation: slideDown 0.5s ease-in-out;
+    }
+    @keyframes slideDown {
+      from {top: 0; opacity: 0;}
+      to {top: 20px; opacity: 1;}
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      z-index: 1001;
+    }
   </style>
 </head>
 <body>
+  <div class="popup" id="popup">🔥 3000+ Downloads – Only ₹49 – Instant Download!</div>
+
   <div class="container">
     <h1>📘 Formula 188cm eBook</h1>
-    <p class="limited-time">🔥 Limited Time Offer – Only 4 eBooks Left!</p>
+    <p class="limited-time">🔥 Limited Time Offer – Ends in <span id="timer">--:--:--</span></p>
     <div class="hero">
       <img src="cover.jpg" alt="188cm eBook Cover" />
     </div>
@@ -104,15 +143,39 @@
       <div class="review"><strong>Rahul Pattnaik:</strong> I’m 21 and this is better than those height pills. The methods are real.</div>
     </div>
 
-    <a class="button" href="https://www.instagram.com/lumeriseofficial?igsh=bGJycjluaXY0eGly" target="_blank">
-      📩 Message us on Instagram
-    </a>
-
     <p style="text-align: center;">📧 Email: <a href="mailto:lumeriseofficial@gmail.com">lumeriseofficial@gmail.com</a></p>
 
     <div class="footer">
+      👀 2,190 people viewed this today<br/>
       &copy; 2025 Lumerise. All rights reserved.
     </div>
   </div>
+
+  <a class="sticky-cta" href="https://lumeriseofficial.myinstamojo.com/checkout/v2/customer-info" target="_blank">💥 Instant Download ₹49</a>
+  <a class="whatsapp-float" href="https://wa.me/919999999999?text=Hi! I'm interested in the 188cm eBook" target="_blank">💬 Chat</a>
+
+  <script>
+    // Countdown timer to midnight
+    function startCountdown() {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(23,59,59,999);
+      const diff = midnight - now;
+      let hours = Math.floor(diff / 1000 / 60 / 60);
+      let minutes = Math.floor((diff / 1000 / 60) % 60);
+      let seconds = Math.floor((diff / 1000) % 60);
+      document.getElementById('timer').textContent = 
+        String(hours).padStart(2, '0') + ':' +
+        String(minutes).padStart(2, '0') + ':' +
+        String(seconds).padStart(2, '0');
+      setTimeout(startCountdown, 1000);
+    }
+    startCountdown();
+
+    // Show popup after delay
+    setTimeout(() => {
+      document.getElementById('popup').style.display = 'block';
+    }, 4000);
+  </script>
 </body>
 </html>
